@@ -77,9 +77,7 @@ Note, if you run a headless rpi it won't work due to electron.
 
 ### MacOS / OSX
 
-OSX uses bsd's permission model. There is no setcap. That leaves running with sudo or similar approaches. Electron+chromium aren't meant to run with sudo.
-
-There were forks of loa-details that (1) ran as a webserver and (2) had packet capture as a separate process. None are maintained currently, but either one of those changes would allow it to work on OSX.
+Doesn't currently work.  
 
 ### Build
 
