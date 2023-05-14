@@ -1,10 +1,10 @@
-This is a temporary fork for users who want to run loa-details on linux. And possibly MacOS.
+This is a temporary fork for users who want to run loa-details on linux.
 
 package.json uses a fork of meter-core that removes raw-packet-sniffer: https://github.com/withnosalt/meter-core 
 
 this fork only sets the meter-core package to that repo
 
-Warning: loa-details performs raw packet capture in an electron app. That's the main hurdle to getting it running in linux.
+Warning: loa-details performs raw packet capture in an electron app. That's the main hurdle to getting it running on non-windows operating systems. 
 
 # Running dev on linux
 
@@ -47,11 +47,21 @@ from your loa-details directory:
 npm run dev
 ```
 
-# MacOS
+# Common Errors
 
-try the above but don't do setcap or the ldconfig setup. It might just work.  It might not. 
+### Package x not found
+```
+rm -rf node_modules
+rm package-lock.json
+npm install
+```
+then run setcap again
 
-If you get this to work on MacOS or run into issues feel free to create an issue  & I'll try to help and/or update the documentation.
+### Can not open socket
+setcap needs to be run again
+
+### libffmpeg not found
+perform ldconfig setup
 
 # Misc 
 
@@ -65,6 +75,12 @@ If you have an rpi with a window manager the above linux dev instructions will p
 
 Note, if you run a headless rpi it won't work due to electron.
 
+### MacOS / OSX
+
+OSX uses bsd's permission model. There is no setcap. That leaves running with sudo or similar approaches. Electron+chromium aren't meant to run with sudo.
+
+There were forks of loa-details that (1) ran as a webserver and (2) had packet capture as a separate process. None are maintained currently, but either one of those changes would allow it to work on OSX.
+
 ### Build
 
-If anyone wants to write a build guide that'd be great. I did not attempt to get a built app running, although npm run build runs successfully. Building would remove the need for the ldconfig step and probably be preferable. 
+If anyone wants to write a build guide that'd be great. I did not attempt to get a built app running, although npm run build runs successfully. Building would remove the need for the ldconfig step and be preferable. 
